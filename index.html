@@ -4,119 +4,558 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>龚平安 | GONG Ping'an</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --primary: #00f5d4;
+            --secondary: #ff006e;
+            --accent: #8338ec;
+            --text: #e0e0e0;
+            --text-muted: #888;
+            --border: #1a1a2e;
         }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #fafafa;
-            color: #1a1a1a;
-            line-height: 1.8;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
+            font-family: 'Noto Sans SC', 'JetBrains Mono', monospace;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        .container {
-            max-width: 600px;
-            width: 100%;
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background: 
+                linear-gradient(90deg, var(--primary) 1px, transparent 1px),
+                linear-gradient(var(--primary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
         }
         
-        .name {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+        .glitch {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            position: relative;
+            margin-bottom: 1rem;
         }
         
-        .divider {
-            width: 60px;
-            height: 2px;
-            background: #1a1a1a;
-            margin: 1.5rem auto;
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
         }
         
-        .info {
-            font-size: 1rem;
-            color: #444;
-            margin-bottom: 0.5rem;
+        .glitch::before {
+            animation: glitch-1 2s infinite;
+            color: var(--secondary);
+            z-index: -1;
         }
         
-        .mbti {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.3rem 1rem;
-            border: 1px solid #1a1a1a;
-            font-family: monospace;
+        .glitch::after {
+            animation: glitch-2 2s infinite;
+            color: var(--accent);
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 3px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(3px, -3px); }
+            60% { clip-path: inset(60% 0 20% 0); transform: translate(-3px, 3px); }
+            80% { clip-path: inset(80% 0 0% 0); transform: translate(3px, -3px); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+            20% { clip-path: inset(60% 0 20% 0); transform: translate(3px, -3px); }
+            40% { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 3px); }
+            60% { clip-path: inset(20% 0 60% 0); transform: translate(3px, -3px); }
+            80% { clip-path: inset(0% 0 80% 0); transform: translate(-3px, 3px); }
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: var(--bg-card);
+        }
+        
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::before {
+            content: '//';
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+        
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+        
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .info-item:last-child {
+            border-bottom: none;
+        }
+        
+        .info-label {
+            color: var(--text-muted);
             font-size: 0.9rem;
-            letter-spacing: 0.2em;
         }
         
-        .contact {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #ddd;
+        .info-value {
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
         }
         
-        .contact-title {
+        /* 技能部分 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .skill-icon {
+            font-size: 1.5rem;
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+        
+        /* 项目部分 - 重点 */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            border-color: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+        
+        .project-link {
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+        
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .project-tag {
+            padding: 0.2rem 0.6rem;
+            background: var(--border);
+            border-radius: 10px;
             font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        /* 联系方式 */
+        .contact-content {
+            text-align: center;
+        }
+        
+        .contact-text {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .contact-item {
-            margin: 0.8rem 0;
-            font-size: 0.95rem;
-            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
         }
         
-        .contact-label {
-            color: #888;
-            margin-right: 0.5rem;
+        .contact-item span:first-child {
+            color: var(--primary);
         }
         
-        .footer {
-            margin-top: 4rem;
-            font-size: 0.75rem;
-            color: #aaa;
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .glitch { font-size: 2.5rem; }
+            .about-content { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            section { padding: 4rem 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="name">龚平安</h1>
-        <div class="divider"></div>
-        <p class="info">长沙职业技术学院 · 软件学院</p>
-        <p class="info">软件开发专业 · 软开2532</p>
-        <span class="mbti">INTJ</span>
-        
-        <div class="contact">
-            <p class="contact-title">Contact</p>
-            <p class="contact-item">
-                <span class="contact-label">微信</span>
-                <span>imgodimright</span>
-            </p>
-            <p class="contact-item">
-                <span class="contact-label">邮箱</span>
-                <span>3524378598@qq.com</span>
-            </p>
+    <div class="bg-animation"></div>
+    
+    <nav>
+        <div class="logo">&lt;GPA /&gt;</div>
+        <ul class="nav-links">
+            <li><a href="#about">关于</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#contact">联系</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="龚平安">龚平安</h1>
+            <p class="tagline">Developer · INTJ · 长沙职业技术学院</p>
+            <div class="hero-badges">
+                <span class="badge">💻 软件开发</span>
+                <span class="badge">📍 长沙</span>
+                <span class="badge">🧠 INTJ</span>
+                <span class="badge">🏫 软开2532</span>
+            </div>
         </div>
-        
-        <div class="footer">
-            © 2026 GONG Ping'an
+    </section>
+    
+    <section id="about">
+        <h2 class="section-title">关于我</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>你好，我是龚平安，一名来自湖南长沙的软件开发专业学生。目前就读于长沙职业技术学院软件学院软开2532班。</p>
+                <p>作为一名INTJ人格的开发者，我热衷于用代码构建秩序，享受解决复杂问题的过程。从Java后端到前端开发，从Android系统到自动化脚本，我始终保持对技术的探索热情。</p>
+                <p>我相信优秀的代码不仅是功能的实现，更是逻辑与美学的结合。</p>
+            </div>
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="info-label">姓名</span>
+                    <span class="info-value">龚平安</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">学校</span>
+                    <span class="info-value">长沙职业技术学院</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">学院</span>
+                    <span class="info-value">软件学院</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">专业</span>
+                    <span class="info-value">软件开发</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">班级</span>
+                    <span class="info-value">软开2532</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">MBTI</span>
+                    <span class="info-value">INTJ</span>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+    
+    <section id="skills">
+        <h2 class="section-title">技术栈</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">☕</span>
+                    <span>Java</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">🐍</span>
+                    <span>Python</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">🌐</span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 70%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">🗄️</span>
+                    <span>SQL</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 65%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">🤖</span>
+                    <span>Android</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 60%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-header">
+                    <span class="skill-icon">⚙️</span>
+                    <span>System</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2 class="section-title">项目展示</h2>
+        <div class="projects-grid">
+            <a href="https://anan666asia.github.io/hat-factory/" class="project-card" target="_blank">
+                <div class="project-header">
+                    <h3 class="project-title">🏭 帽子工厂</h3>
+                    <span class="project-link">访问 →</span>
+                </div>
+                <p class="project-desc">MBTI人格测试与经典网络梗帽子匹配系统。12道情境测试题，测出你的专属帽子。</p>
+                <div class="project-tags">
+                    <span class="project-tag">HTML5</span>
+                    <span class="project-tag">CSS3</span>
+                    <span class="project-tag">JavaScript</span>
+                    <span class="project-tag">MBTI</span>
+                </div>
+            </a>
+            
+            <div class="project-card">
+                <h3 class="project-title">📋 学生管理系统</h3>
+                <p class="project-desc">Java面向对象编程练习项目，包含继承、多态、集合操作等核心概念实践。</p>
+                <div class="project-tags">
+                    <span class="project-tag">Java</span>
+                    <span class="project-tag">OOP</span>
+                    <span class="project-tag">IntelliJ IDEA</span>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <h3 class="project-title">📊 班级档案系统</h3>
+                <p class="project-desc">软开2532班完整的班级管理档案，包含花名册、宿舍信息、轮次表等数据管理。</p>
+                <div class="project-tags">
+                    <span class="project-tag">Data</span>
+                    <span class="project-tag">Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h2 class="section-title">联系方式</h2>
+        <div class="contact-content">
+            <p class="contact-text">有技术交流或合作意向？欢迎联系我。</p>
+            <div class="contact-links">
+                <div class="contact-item">
+                    <span>微信</span>
+                    <span>imgodimright</span>
+                </div>
+                <div class="contact-item">
+                    <span>邮箱</span>
+                    <span>3524378598@qq.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>GitHub</span>
+                    <span>anan666asia</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Made with &lt;code&gt; by 龚平安</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2026 All Rights Reserved</p>
+    </footer>
 </body>
 </html>
