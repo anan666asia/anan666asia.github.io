@@ -610,9 +610,9 @@
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
@@ -674,6 +674,10 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
             .about-content { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
         }
         
         @media (max-width: 768px) {
@@ -863,7 +867,9 @@
         <div class="projects-grid">
             <a href="https://anan666asia.github.io/hat-factory/" class="project-card featured-project" target="_blank">
                 <span class="featured-badge">⭐ 代表作</span>
-                <div class="project-icon">🏭</div>
+                <div class="project-icon">
+                    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="80" height="80" style="border-radius: 50%; object-fit: cover;" alt="cute cat">
+                </div>
                 <h3 class="project-title">帽子工厂 - MBTI人格测试系统</h3>
                 <p class="project-desc">基于MBTI理论的全栈Web应用，12道情境测试题精准匹配性格类型。采用纯前端技术实现，支持响应式布局和交互动画，上线首周访问量突破1000+。</p>
                 <div class="project-stats">
@@ -945,6 +951,11 @@
                     <div class="contact-label">GitHub</div>
                     <div class="contact-value">@anan666asia</div>
                 </div>
+                <a href="https://b23.tv/RWWjdac" class="contact-card" target="_blank" style="text-decoration: none; color: inherit;">
+                    <div class="contact-icon" style="color: #fb7299;">📺</div>
+                    <div class="contact-label">哔哩哔哩</div>
+                    <div class="contact-value" style="color: #fb7299;">@anan666asia</div>
+                </a>
             </div>
         </div>
     </section>
